@@ -1,0 +1,28 @@
+- name: install dependency packages
+  yum: name={{ item }} state=present
+  with_items:
+    - readline-devel
+
+- stat: path={{ rbenv_root }}
+  register: rbenv_path
+
+- name: install rbenv
+  git: repo=https://github.com/sstephenson/rbenv.git dest={{ rbenv_root }}
+  when: rbenv_path.stat.exists == false
+
+- name: install ruby-build
+  git: repo=https://github.com/sstephenson/ruby-build.git dest="{{ rbenv_root }}/plugins/ruby-build"
+  when: rbenv_path.stat.exists == false
+
+- name: create rbenv symlink
+  file: src="{{ rbenv_root }}/bin/rbenv" dest=/usr/bin/rbenv state=link
+
+- name: install ruby-{{ ruby_ver }}
+  shell: RBENV_ROOT={{ rbenv_root }} eval "$(rbenv init -)" && rbenv install -s {{ ruby_ver }}
+
+- name: using ruby-{{ ruby_ver }}
+  shell: RBENV_ROOT={{ rbenv_root }} eval "$(rbenv init -)" && rbenv global {{ ruby_ver }} && rbenv rehash
+
+- name: install rbenv profile
+  template: src=rbenv.sh dest=/etc/profile.d/rbenv.sh mode=0644
+

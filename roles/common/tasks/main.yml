@@ -1,0 +1,8 @@
+- name: clear ansible cache directory
+  file: path=/tmp/ansible state=absent
+- name: create ansible cache directory
+  file: path=/tmp/ansible state=directory
+
+- include: yum.yml
+- include: zsh.yml
+- include: ntp.yml

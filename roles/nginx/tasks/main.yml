@@ -1,0 +1,6 @@
+- name: install nginx
+  yum: pkg=nginx state=present
+
+- name: nginx start on boot
+  service: name=nginx state=started enabled=yes
+

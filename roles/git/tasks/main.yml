@@ -1,0 +1,29 @@
+- name: install dependency packages
+  yum: name={{ item }} state=present
+  with_items:
+    - curl-devel
+    - expat-devel
+    - gettext-devel
+    - openssl-devel
+    - zlib-devel
+    - gcc
+    - perl-ExtUtils-MakeMaker
+
+- name: remove git
+  yum: name=git state=absent
+
+- name: download git archive
+  get_url: url=https://www.kernel.org/pub/software/scm/git/git-{{ git_ver }}.tar.gz dest=/tmp/ansible/git-{{ git_ver }}.tar.gz
+
+- name: extract git archive
+  command: tar zxvf git-{{ git_ver }}.tar.gz chdir=/tmp/ansible
+
+- name: configure git
+  command: ./configure chdir=/tmp/ansible/git-{{ git_ver }}
+
+- name: make git
+  command: make chdir=/tmp/ansible/git-{{ git_ver }}
+
+- name: make install git
+  command: make install chdir=/tmp/ansible/git-{{ git_ver }}
+

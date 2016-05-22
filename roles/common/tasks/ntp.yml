@@ -1,0 +1,9 @@
+- name: install ntpd
+  yum: name={{ item }} state=present
+  with_items:
+    - ntp
+    - ntpdate
+
+- name: ntpd start on boot
+  service: name=ntpd state=started enabled=yes
+

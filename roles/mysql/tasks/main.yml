@@ -1,0 +1,15 @@
+- name: install mysql-community-release
+  yum: name=http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm state=present
+
+- name: install mysql-community-server
+  yum: pkg=mysql-community-server state=present
+
+- name: install mysql-community-devel
+  yum: pkg=mysql-community-devel state=present
+
+- name: overwrite my.cnf
+  template: src=my.cnf dest=/etc/my.cnf
+
+- name: mysqld start on boot
+  service: name=mysqld state=started enabled=yes
+

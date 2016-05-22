@@ -1,0 +1,18 @@
+- hosts: sakura_vps
+  become: true
+  tasks:
+    - command: echo "$PATH"
+      register: default_path
+
+- hosts: sakura_vps
+  become: true
+  user: vagrant
+  roles:
+    - common
+#    - git
+#    - mysql
+#    - ruby
+    - nginx
+  environment:
+    PATH: /usr/local/bin:{{ default_path }}
+

@@ -1,0 +1,3 @@
+- name: install zsh
+  yum: pkg=zsh state=latest
+
