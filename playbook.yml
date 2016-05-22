@@ -9,10 +9,11 @@
   user: vagrant
   roles:
     - common
-#    - git
-#    - mysql
-#    - ruby
+    - git
+    - mysql
+    - ruby
     - nginx
+    - redis
   environment:
     PATH: /usr/local/bin:{{ default_path }}
 
