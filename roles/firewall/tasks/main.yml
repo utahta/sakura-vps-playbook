@@ -1,0 +1,19 @@
+- name: firewalld is enabled and started
+  service: name=firewalld state=running enabled=yes
+  tags: firewall
+
+- name: firewalld enabled http
+  firewalld: service=http permanent=true state=enabled immediate=true
+  tags: firewall
+
+- name: firewalld enabled https
+  firewalld: service=https permanent=true state=enabled immediate=true
+  tags: firewall
+
+- name: firewalld enabled ssh
+  firewalld: service=ssh permanent=true state=disabled immediate=true
+  tags: firewall
+
+- name: firewalld enabled 11122
+  firewalld: port=11122/tcp permanent=true state=enabled immediate=true
+  tags: firewall

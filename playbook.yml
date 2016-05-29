@@ -6,7 +6,6 @@
 
 - hosts: sakura_vps
   become: true
-  user: vagrant
   roles:
     - common
     - git
@@ -14,6 +13,8 @@
     - ruby
     - nginx
     - redis
+    - ssh
+    - firewall
   environment:
-    PATH: /usr/local/bin:{{ default_path }}
+    PATH: /usr/local/bin:{{ default_path.stdout }}
 

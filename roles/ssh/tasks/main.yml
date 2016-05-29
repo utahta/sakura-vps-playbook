@@ -1,0 +1,26 @@
+- name: add a user
+  user: name=utahta state=present group=wheel password=$6$rounds=656000$.Y8NqkTcdSjAvvCk$gjam9lNW.9rZBMA5/cmn9leZny8r6Jk3c5QgKuDcj1M0JoCUwLLyjeYkmFiZSCSW4VAyGfs/L69NurH4W8ksf/
+  tags: ssh
+
+- name: add a sudo user
+  lineinfile: 'dest=/etc/sudoers backup=yes state=present regexp="^utahta" line="utahta ALL=(ALL) NOPASSWD: ALL"'
+  tags: ssh
+
+- name: set authorized_key
+  authorized_key: user=utahta key="{{ lookup('file', '/Users/utahta/.ssh/sakura_vps.pub') }}"
+  tags: ssh
+
+- name: set Port
+  replace: dest=/etc/ssh/sshd_config regexp='#Port 22' replace='Port 11122'
+  tags: ssh
+
+- name: set PermitRootLogin no
+  replace: dest=/etc/ssh/sshd_config regexp='#PermitRootLogin yes' replace='PermitRootLogin no'
+  tags: ssh
+
+- name: set PasswordAuthentication no
+  replace: dest=/etc/ssh/sshd_config regexp='PasswordAuthentication yes' replace='PasswordAuthentication no'
+  tags: ssh
+
+- name: restart sshd
+  service: name=sshd state=restarted
