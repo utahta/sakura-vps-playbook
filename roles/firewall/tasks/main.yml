@@ -10,7 +10,7 @@
   firewalld: service=https permanent=true state=enabled immediate=true
   tags: firewall
 
-- name: firewalld enabled ssh
+- name: firewalld disabled ssh
   firewalld: service=ssh permanent=true state=disabled immediate=true
   tags: firewall
 
