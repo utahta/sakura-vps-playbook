@@ -8,3 +8,9 @@
 - include: yum.yml
 - include: zsh.yml
 - include: ntp.yml
+
+- name: install packages
+  yum: name={{ item }} state=present
+  with_items:
+    - vim-common
+    - vim-enhanced
