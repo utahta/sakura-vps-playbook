@@ -17,3 +17,7 @@
 - name: firewalld enabled 11122
   firewalld: port=11122/tcp permanent=true state=enabled immediate=true
   tags: firewall
+
+- name: firewalld enabled 13609
+  firewalld: port=13609/tcp permanent=true state=enabled immediate=true
+  tags: firewall

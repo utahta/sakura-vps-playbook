@@ -12,7 +12,7 @@ Host sakura.vps
   IdentityFile /path/to/.vagrant/machines/default/virtualbox/private_key
   IdentitiesOnly yes
 
-$ ansible-playbook -i vagrant.hosts playbook.yml
+$ make vagrant
 ```
 
 ### Honban
@@ -21,5 +21,5 @@ $ ansible-playbook -i vagrant.hosts playbook.yml
 $ vi /etc/hosts
 *.*.*.* sakura.vps
 
-$ ansible-playbook -i vagrant.hosts playbook.yml --ask-pass
+$ make honban
 ```
