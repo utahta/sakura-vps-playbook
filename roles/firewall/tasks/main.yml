@@ -14,10 +14,10 @@
   firewalld: service=ssh permanent=true state=disabled immediate=true
   tags: firewall
 
-- name: firewalld enabled 11122
-  firewalld: port=11122/tcp permanent=true state=enabled immediate=true
+- name: firewalld enabled ssh
+  firewalld: port={{ ssh.port }}/tcp permanent=true state=enabled immediate=true
   tags: firewall
 
-- name: firewalld enabled 13609
-  firewalld: port=13609/tcp permanent=true state=enabled immediate=true
+- name: firewalld enabled redis
+  firewalld: port={{ redis.port }}/tcp permanent=true state=enabled immediate=true
   tags: firewall

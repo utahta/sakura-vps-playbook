@@ -1,5 +1,5 @@
 - name: add a user
-  user: name=utahta state=present group=wheel password=$6$rounds=656000$.Y8NqkTcdSjAvvCk$gjam9lNW.9rZBMA5/cmn9leZny8r6Jk3c5QgKuDcj1M0JoCUwLLyjeYkmFiZSCSW4VAyGfs/L69NurH4W8ksf/
+  user: name={{ ssh.user }} state=present group=wheel password={{ ssh.password }}
   tags: ssh
 
 - name: add a sudo user
@@ -7,11 +7,11 @@
   tags: ssh
 
 - name: set authorized_key
-  authorized_key: user=utahta key="{{ lookup('file', '/Users/utahta/.ssh/sakura_vps.pub') }}"
+  authorized_key: user={{ ssh.user }} key="{{ ssh.authorized_key }}"
   tags: ssh
 
 - name: set Port
-  replace: dest=/etc/ssh/sshd_config regexp='#Port 22' replace='Port 11122'
+  replace: dest=/etc/ssh/sshd_config regexp='#Port 22' replace='Port {{ ssh.port }}'
   tags: ssh
 
 - name: set PermitRootLogin no
