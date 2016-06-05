@@ -12,12 +12,15 @@
 
 - name: set Port
   replace: dest=/etc/ssh/sshd_config regexp='#Port 22' replace='Port {{ ssh.port }}'
+  notify: restart sshd and firewalld
   tags: ssh
 
 - name: set PermitRootLogin no
   replace: dest=/etc/ssh/sshd_config regexp='#PermitRootLogin yes' replace='PermitRootLogin no'
+  notify: restart sshd and firewalld
   tags: ssh
 
 - name: set PasswordAuthentication no
   replace: dest=/etc/ssh/sshd_config regexp='PasswordAuthentication yes' replace='PasswordAuthentication no'
+  notify: restart sshd and firewalld
   tags: ssh

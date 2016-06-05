@@ -15,6 +15,9 @@
     - redis
     - ssh
     - firewall
+  handlers:
+    - name: restart sshd and firewalld
+      action: service name={{ item }} state=restarted
+      with_items: ["sshd", "firewalld"]
   environment:
     PATH: /usr/local/bin:{{ default_path.stdout }}
-
