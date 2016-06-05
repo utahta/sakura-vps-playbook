@@ -21,6 +21,3 @@
 - name: set PasswordAuthentication no
   replace: dest=/etc/ssh/sshd_config regexp='PasswordAuthentication yes' replace='PasswordAuthentication no'
   tags: ssh
-
-- name: restart sshd
-  service: name=sshd state=restarted
