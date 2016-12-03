@@ -34,5 +34,6 @@ $ vi ~/.ssh/config
 $ git clone https://github.com/utahta/sakura-vps-playbook.git
 $ cd sakura-vps-playbook
 $ make vagrant
+$ ssh vagrant@sakura.vps -p PORT
 ```
 
