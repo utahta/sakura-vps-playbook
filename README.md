@@ -23,3 +23,16 @@ $ vi /etc/hosts
 
 $ make honban
 ```
+
+### Memo
+
+```
+$ vi /etc/hosts
+$ vagrant init centos/7
+$ vagrant up
+$ vi ~/.ssh/config
+$ git clone https://github.com/utahta/sakura-vps-playbook.git
+$ cd sakura-vps-playbook
+$ make vagrant
+```
+
